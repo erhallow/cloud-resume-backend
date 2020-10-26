@@ -1,0 +1,38 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Lambda function updates visitor count
+Resources:
+  counter:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: counter.lambda_handler
+      Runtime: python3.6
+      CodeUri: s3://cloudresume-backend-hallow/cc92de0aac70a19f4f04dcb40a41d7a2
+      Description: Lambda function updates visitor count
+      MemorySize: 128
+      Timeout: 3
+      Environment:
+        Variables:
+          TABLE_NAME:
+            Ref: Table
+          REGION_NAME:
+            Ref: AWS::Region
+      Events:
+        VisitorCountAPI:
+          Type: Api
+          Properties:
+            Path: /count
+            Method: GET
+      Policies:
+      - DynamoDBCrudPolicy:
+          TableName:
+            Ref: Table
+  Table:
+    Type: AWS::Serverless::SimpleTable
+    Properties:
+      PrimaryKey:
+        Name: id
+        Type: String
+      ProvisionedThroughput:
+        ReadCapacityUnits: 2
+        WriteCapacityUnits: 2
