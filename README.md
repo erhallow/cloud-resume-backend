@@ -4,8 +4,8 @@ This is the backend for my Cloud Resume project.
 
 ## Links
 
-Cloud Resume Github: https://github.com/erhallow/cloud-resume
-Live Website: https://erichallow.com/
+- Cloud Resume Github: https://github.com/erhallow/cloud-resume
+- Live Website: https://erichallow.com/
 
 ## Description
 
